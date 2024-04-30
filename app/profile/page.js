@@ -9,9 +9,20 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle, } from "@/compone
 
 //CUSTOM COMPONENT IMPORTS
 import UserAvatar from '@/components/custom/UserAvatar'
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
+function DataRetriever() {
+  const user_data = {
+    full_name : "John Doe",
+    username: "@john1321",
+    // <UserAvatar src='' htmlFor="picture" id="picture"/>
+
+  }
+  return user_data;
+}
 
 export default function () {
+  const data = DataRetriever()
   return (
     <main>
       <Card className="w-[550px] h-auto border-0 m-auto mt-36">
@@ -21,14 +32,20 @@ export default function () {
         <form onSubmit={'changeSettings'}>
           <CardContent>
             <div className="grid w-full items-center gap-4">
-              <UserAvatar />
+            <div className="flex  gap-4">
+              <Avatar>
+                <AvatarImage htmlFor="picture" id="picture" src=""></AvatarImage>
+              </Avatar>
+              
+              <Input className= "w-auto" id="picture" type="file"  accept="image/jpeg, image/jpg, image/png" />
+              </div>
               <div className="flex flex-col space-y-1.5">
                 <Label >Name:</Label>
-                <Input id="name" name="name" value="{username}" disabled />
+                <Input id="name" name="name" value={data.full_name} disabled />
               </div>
               <div className="flex flex-col space-y-1.5">
                 <Label>Username:</Label>
-                <Input id="password" name="password" value="@{full_name}" disabled />
+                <Input id="password" name="password" value={data.username} disabled />
               </div>
             </div>
           </CardContent>

@@ -10,27 +10,26 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, } from "@/components/ui/card"
 
 // CUSTOM COMPONENT IMPORTS
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import UserAvatar from '@/components/custom/UserAvatar'
 import { createClient } from '@/utils/supabase/server'
 import { redirect } from 'next/navigation'
-import { revalidatePath } from 'next/cache'
-
 
 export default async function PostsPage() {
 
     const supabase = createClient()
 
-    const { data: user } = await supabase.auth.getUser();
-    const userID = user.id;
-    if (!userID){
+    const { data } = await supabase.auth.getUser();
+    const userID = data.user?.id;
+    if (!data || userID == undefined) {
         console.log("User ID -->>>", userID)
-        revalidatePath('/', 'layout')
         redirect('/')
     }
 
+    console.log("User ID -->>>", userID)
     let { data: posts, error: posts_error } = await supabase.from('posts').select('*')
     let { data: users, error: users_error } = await supabase.from('profiles').select('*')
-
+    let { data: avatar_url } = await supabase.from('profiles').select('avatar_url').eq('id', userID).single()
 
     if (posts_error || users_error) {
         console.log("Got an error:", posts_error || users_error);
@@ -47,7 +46,10 @@ export default async function PostsPage() {
 
                 <div className='flex absolute top-3 right-5 text-xl leading-10'>
                     <Link href="/profile">
-                        <UserAvatar href="/profile" /></Link>
+                        <Avatar>
+                            <AvatarImage htmlFor="picture" id="picture" src={avatar_url}></AvatarImage>
+                        </Avatar>
+                    </Link>
                     <Link href="/profile" className='ml-2'>Profile</Link>
                 </div>
 
@@ -57,11 +59,16 @@ export default async function PostsPage() {
                     {
                         posts.map((post) => {
                             const user = users.find(u => u.id === post.user_owner);
+                            const avatar_url = user.avatar_url;
+
                             return (
+
                                 <Card className="bg-white shadow-md rounded-lg overflow-hidden">
                                     <CardHeader>
                                         <div className="flex items-center">
-                                            <UserAvatar />
+                                            <Avatar>
+                                                <AvatarImage htmlFor="picture" id="picture" src={avatar_url}></AvatarImage>
+                                            </Avatar>
                                             <div className="ml-2">
                                                 <h3 className="font-bold">{user.full_name}</h3>
                                                 <p className="text-gray-500">@{user.username}</p>
