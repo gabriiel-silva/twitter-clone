@@ -13,18 +13,20 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, 
 import UserAvatar from '@/components/custom/UserAvatar'
 import { createClient } from '@/utils/supabase/server'
 import { redirect } from 'next/navigation'
-import ReadUserSession from './actions'
+import { revalidatePath } from 'next/cache'
 
 
 export default async function PostsPage() {
 
-    const id = await ReadUserSession();
-    console.log(id);
-    if (id === undefined || id === null) {
-        return redirect('/');
-    }
-
     const supabase = createClient()
+
+    const { data: user } = await supabase.auth.getUser();
+    const userID = user.id;
+    if (!userID){
+        console.log("User ID -->>>", userID)
+        revalidatePath('/', 'layout')
+        redirect('/')
+    }
 
     let { data: posts, error: posts_error } = await supabase.from('posts').select('*')
     let { data: users, error: users_error } = await supabase.from('profiles').select('*')

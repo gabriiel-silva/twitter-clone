@@ -5,7 +5,7 @@ import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 
 //SUPABASE IMPORTS
-import { createClient } from '@/utils/supabase/client'
+import { createClient } from '@/utils/supabase/server'
 
 
 export async function login(formData) {

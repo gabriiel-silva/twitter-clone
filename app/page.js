@@ -2,7 +2,6 @@
 
 //REACT AND NEXT IMPORTS
 import React, { useState } from 'react'
-import Image from 'next/image';
 
 //SHADCN IMPORTS
 import { Button } from "@/components/ui/button"
