@@ -8,44 +8,54 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, } from "@/components/ui/card"
 
 //CUSTOM COMPONENT IMPORTS
-import UserAvatar from '@/components/custom/UserAvatar'
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Avatar, AvatarImage } from "@/components/ui/avatar"
+import { createClient } from '@/utils/supabase/server'
+import { redirect } from 'next/navigation'
 
-function DataRetriever() {
-  const user_data = {
-    full_name : "John Doe",
-    username: "@john1321",
-    // <UserAvatar src='' htmlFor="picture" id="picture"/>
 
+export default async function ProfilePage() {
+
+  const supabase = createClient()
+
+  const { data } = await supabase.auth.getUser();
+  const userID = data.user?.id;
+  if (!data || userID == undefined) {
+    console.log("User ID -->>>", userID)
+    redirect('/')
   }
-  return user_data;
-}
+  console.log("User ID -->>>", userID)
 
-export default function () {
-  const data = DataRetriever()
+  let { data: users, error: users_error } = await supabase.from('profiles').select('*')
+
+  if (users_error) {
+    console.log("Got an error while trying to retrieve users: ", users_error);
+  }
+  const user = users.find(u => u.id === userID);
+  const avatar_url = user.avatar_url;
+
   return (
     <main>
       <Card className="w-[550px] h-auto border-0 m-auto mt-36">
         <CardHeader>
           <CardTitle>Change settings</CardTitle>
         </CardHeader>
-        <form onSubmit={'changeSettings'}>
+        <form >
           <CardContent>
             <div className="grid w-full items-center gap-4">
-            <div className="flex  gap-4">
-              <Avatar>
-                <AvatarImage htmlFor="picture" id="picture" src=""></AvatarImage>
-              </Avatar>
-              
-              <Input className= "w-auto" id="picture" type="file"  accept="image/jpeg, image/jpg, image/png" />
+              <div className="flex  gap-4">
+                <Avatar>
+                  <AvatarImage htmlFor="picture" id="picture" src={avatar_url}></AvatarImage>
+                </Avatar>
+
+                <Input className="w-auto" id="picture" type="file" accept="image/jpeg, image/jpg, image/png" />
               </div>
               <div className="flex flex-col space-y-1.5">
                 <Label >Name:</Label>
-                <Input id="name" name="name" value={data.full_name} disabled />
+                <Input id="name" name="name" value={user.full_name} />
               </div>
               <div className="flex flex-col space-y-1.5">
                 <Label>Username:</Label>
-                <Input id="password" name="password" value={data.username} disabled />
+                <Input id="password" name="password" value={user.username}  />
               </div>
             </div>
           </CardContent>

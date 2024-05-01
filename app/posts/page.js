@@ -10,8 +10,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, } from "@/components/ui/card"
 
 // CUSTOM COMPONENT IMPORTS
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import UserAvatar from '@/components/custom/UserAvatar'
+import { Avatar, AvatarImage } from "@/components/ui/avatar"
 import { createClient } from '@/utils/supabase/server'
 import { redirect } from 'next/navigation'
 
@@ -29,7 +28,6 @@ export default async function PostsPage() {
     console.log("User ID -->>>", userID)
     let { data: posts, error: posts_error } = await supabase.from('posts').select('*')
     let { data: users, error: users_error } = await supabase.from('profiles').select('*')
-    let { data: avatar_url } = await supabase.from('profiles').select('avatar_url').eq('id', userID).single()
 
     if (posts_error || users_error) {
         console.log("Got an error:", posts_error || users_error);
@@ -40,17 +38,8 @@ export default async function PostsPage() {
 
         return (
             <main>
-                <div className='flex absolute top-3 left-5 text-xl leading-10'>
+                <div className='flex absolute top-3 left-5 text-xl leading-10 font-bold'>
                     <button>Logout</button>
-                </div>
-
-                <div className='flex absolute top-3 right-5 text-xl leading-10'>
-                    <Link href="/profile">
-                        <Avatar>
-                            <AvatarImage htmlFor="picture" id="picture" src={avatar_url}></AvatarImage>
-                        </Avatar>
-                    </Link>
-                    <Link href="/profile" className='ml-2'>Profile</Link>
                 </div>
 
                 <div className='flex flex-col gap-4 w-1/2 border shadow-sm m-auto mt-40 rounded-sm p-20'>
@@ -75,6 +64,16 @@ export default async function PostsPage() {
                                             </div>
                                         </div>
                                     </CardHeader>
+
+                                    <div className='flex absolute top-3 right-5 text-xl leading-10 font-bold'>
+                                        <Link href="/profile">
+                                            <Avatar>
+                                                <AvatarImage htmlFor="picture" id="picture" src={avatar_url}></AvatarImage>
+                                            </Avatar>
+                                        </Link>
+                                        <Link href="/profile" className='ml-2'>Profile</Link>
+                                    </div>
+
                                     <CardContent className="grid gap-4">
                                         <p>{post.content}</p>
                                     </CardContent>
