@@ -1,6 +1,6 @@
 'use server'
 
-//NEXT IMPORTS
+//REACT AND NEXT IMPORTS
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 

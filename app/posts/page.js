@@ -1,18 +1,23 @@
 // REACT AND NEXT IMPORTS
 import React from 'react'
 import Link from 'next/link'
+import { redirect } from 'next/navigation'
+
+//SUPABASE IMPORTS
+import { createClient } from '@/utils/supabase/server'
+
+// SHADCN IMPORTS
+import { Button } from '@/components/ui/button'
+import { Avatar, AvatarImage } from "@/components/ui/avatar"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, } from "@/components/ui/card"
 
 //ICON IMPORTS
 import { HeartIcon, MessageCircleMoreIcon, Share2Icon } from 'lucide-react'
 
-// SHADCN IMPORTS
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, } from "@/components/ui/card"
-
 // CUSTOM COMPONENT IMPORTS
-import { Avatar, AvatarImage } from "@/components/ui/avatar"
-import { createClient } from '@/utils/supabase/server'
-import { redirect } from 'next/navigation'
+import { signOut } from './actions'
+import { LogOut } from 'lucide-react';
+
 
 export default async function PostsPage() {
 
@@ -22,7 +27,7 @@ export default async function PostsPage() {
     const userID = data.user?.id;
     if (!data || userID == undefined) {
         console.log("User ID -->>>", userID)
-        redirect('/')
+        redirect('/error')
     }
 
     console.log("User ID -->>>", userID)
@@ -39,10 +44,12 @@ export default async function PostsPage() {
         return (
             <main>
                 <div className='flex absolute top-3 left-5 text-xl leading-10 font-bold'>
-                    <button>Logout</button>
+                    <button onClick={signOut}>
+                        <LogOut />
+                    </button>
                 </div>
 
-                <div className='flex flex-col gap-4 w-1/2 border shadow-sm m-auto mt-40 rounded-sm p-20'>
+                <div className='flex flex-col gap-4 w-1/2 border shadow-sm m-auto mt-40 rounded-sm p-20 '>
                     <CardTitle>Timeline</CardTitle>
                     <CardDescription>Estes sao os seus posts no clone do Twitter.</CardDescription>
                     {
@@ -52,7 +59,7 @@ export default async function PostsPage() {
 
                             return (
 
-                                <Card className="bg-white shadow-md rounded-lg overflow-hidden">
+                                <Card className="bg-white shadow-md rounded-lg overflow-hidden ">
                                     <CardHeader>
                                         <div className="flex items-center">
                                             <Avatar>
@@ -65,7 +72,7 @@ export default async function PostsPage() {
                                         </div>
                                     </CardHeader>
 
-                                    <div className='flex absolute top-3 right-5 text-xl leading-10 font-bold'>
+                                    <div className='flex absolute top-3 right-5 text-xl leading-10 '>
                                         <Link href="/profile">
                                             <Avatar>
                                                 <AvatarImage htmlFor="picture" id="picture" src={avatar_url}></AvatarImage>

@@ -1,17 +1,20 @@
 //REACT AND NEXT IMPORTS
 import React from "react";
+import { redirect } from 'next/navigation'
+
+//SUPABASE IMPORTS
+import { createClient } from '@/utils/supabase/server'
 
 //SHADCN IMPORTS
 import { Input } from '@/components/ui/input'
 import { Label } from "@/components/ui/label"
 import { Button } from '@/components/ui/button'
+import { Avatar, AvatarImage } from "@/components/ui/avatar"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, } from "@/components/ui/card"
 
 //CUSTOM COMPONENT IMPORTS
-import { Avatar, AvatarImage } from "@/components/ui/avatar"
-import { createClient } from '@/utils/supabase/server'
-import { redirect } from 'next/navigation'
-
+import { signOut } from '../posts/actions'
+import { LogOut } from 'lucide-react';
 
 export default async function ProfilePage() {
 
@@ -21,7 +24,7 @@ export default async function ProfilePage() {
   const userID = data.user?.id;
   if (!data || userID == undefined) {
     console.log("User ID -->>>", userID)
-    redirect('/')
+    redirect('/error')
   }
   console.log("User ID -->>>", userID)
 
@@ -35,6 +38,12 @@ export default async function ProfilePage() {
 
   return (
     <main>
+      <div className='flex absolute top-3 left-5 text-xl leading-10 font-bold'>
+
+        <button onClick={signOut}>
+          <LogOut />
+        </button>
+      </div>
       <Card className="w-[550px] h-auto border-0 m-auto mt-36">
         <CardHeader>
           <CardTitle>Change settings</CardTitle>
@@ -51,11 +60,11 @@ export default async function ProfilePage() {
               </div>
               <div className="flex flex-col space-y-1.5">
                 <Label >Name:</Label>
-                <Input id="name" name="name" value={user.full_name} />
+                <Input id="name" name="name" /* onChange={'handleChange'} */ value={user.full_name} />
               </div>
               <div className="flex flex-col space-y-1.5">
                 <Label>Username:</Label>
-                <Input id="password" name="password" value={user.username}  />
+                <Input id="password" name="password" /* onChange={'handleChange'} */ value={user.username} />
               </div>
             </div>
           </CardContent>
