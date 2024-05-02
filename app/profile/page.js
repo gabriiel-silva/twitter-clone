@@ -36,6 +36,23 @@ export default async function ProfilePage() {
   const user = users.find(u => u.id === userID);
   const avatar_url = user.avatar_url;
 
+  function UpdateProfile() {
+
+    var newName = document.getElementById('username').value;
+  
+    supabase
+      .from('profiles')
+      .update({ username: newName })
+      .eq('id', userID)
+      .then(({ data: updatedUser, error: updateError }) => {
+        if (updateError) {
+          console.error("Error updating username:", updateError);
+        } else {
+          console.log("Username updated successfully:", updatedUser);
+        }
+      });
+  }
+
   return (
     <main>
       <div className='flex absolute top-3 left-5 text-xl leading-10 font-bold'>
@@ -48,7 +65,7 @@ export default async function ProfilePage() {
         <CardHeader>
           <CardTitle>Change settings</CardTitle>
         </CardHeader>
-        <form >
+        <form>
           <CardContent>
             <div className="grid w-full items-center gap-4">
               <div className="flex  gap-4">
@@ -60,16 +77,16 @@ export default async function ProfilePage() {
               </div>
               <div className="flex flex-col space-y-1.5">
                 <Label >Name:</Label>
-                <Input id="name" name="name" /* onChange={'handleChange'} */ value={user.full_name} />
+                <Input id="name" name="name" placeholder={user.full_name} />
               </div>
               <div className="flex flex-col space-y-1.5">
                 <Label>Username:</Label>
-                <Input id="password" name="password" /* onChange={'handleChange'} */ value={user.username} />
+                <Input id="username" name="username" placeholder={user.username}/>
               </div>
             </div>
           </CardContent>
           <CardFooter className="flex flex-col gap-8 justify-between">
-            <Button className="w-auto" type="submit">Change</Button>
+            <Button className="w-auto" type="submit" >Change</Button>
           </CardFooter>
         </form>
       </Card>
