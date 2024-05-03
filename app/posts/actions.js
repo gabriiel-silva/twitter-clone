@@ -1,5 +1,4 @@
 'use client'
-
 //SUPABASE IMPORTS
 import { createClient } from '@/utils/supabase/client'
 

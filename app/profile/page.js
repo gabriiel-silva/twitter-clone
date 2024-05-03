@@ -15,43 +15,29 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle, } from "@/compone
 //CUSTOM COMPONENT IMPORTS
 import { signOut } from '../posts/actions'
 import { LogOut } from 'lucide-react';
+import UpdateProfile, { UpdateAvatar } from "./action";
+import UpdateProfileAndAvatar from "./action";
 
 export default async function ProfilePage() {
 
-  const supabase = createClient()
-
+  const supabase = createClient();
   const { data } = await supabase.auth.getUser();
+  
   const userID = data.user?.id;
+
   if (!data || userID == undefined) {
     console.log("User ID -->>>", userID)
     redirect('/error')
   }
   console.log("User ID -->>>", userID)
 
-  let { data: users, error: users_error } = await supabase.from('profiles').select('*')
+  const { data: users, error: users_error } = await supabase.from('profiles').select('*').eq('id', userID )
 
   if (users_error) {
     console.log("Got an error while trying to retrieve users: ", users_error);
   }
   const user = users.find(u => u.id === userID);
   const avatar_url = user.avatar_url;
-
-  function UpdateProfile() {
-
-    var newName = document.getElementById('username').value;
-  
-    supabase
-      .from('profiles')
-      .update({ username: newName })
-      .eq('id', userID)
-      .then(({ data: updatedUser, error: updateError }) => {
-        if (updateError) {
-          console.error("Error updating username:", updateError);
-        } else {
-          console.log("Username updated successfully:", updatedUser);
-        }
-      });
-  }
 
   return (
     <main>
@@ -65,7 +51,7 @@ export default async function ProfilePage() {
         <CardHeader>
           <CardTitle>Change settings</CardTitle>
         </CardHeader>
-        <form>
+        <form onSubmit={UpdateProfileAndAvatar}>
           <CardContent>
             <div className="grid w-full items-center gap-4">
               <div className="flex  gap-4">
@@ -86,7 +72,7 @@ export default async function ProfilePage() {
             </div>
           </CardContent>
           <CardFooter className="flex flex-col gap-8 justify-between">
-            <Button className="w-auto" type="submit" >Change</Button>
+            <Button className="w-auto" type="submit">Change</Button>
           </CardFooter>
         </form>
       </Card>
