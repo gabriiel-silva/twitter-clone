@@ -36,16 +36,3 @@ export default async function UpdateProfile() {
         console.error("An error occurred while updating profile: ", error);
     }
 }
-
-/* export async function UpdateAvatar() {
-    const supabase = createClient();
-    const file = document.querySelector('input[type="file"]').files[0];
-    const { data : uploadData,  error : uploadError } = await supabase.storage.from('avatar_url').upload(`public/${file.name}`, file);
-    
-    if (uploadError) {
-        console.error('Got ant error while trying to upload avatar: ', uploadError.message);
-        return;
-    }
-    console.log('Avatar sent sucessfully:', uploadData);
-}
-*/

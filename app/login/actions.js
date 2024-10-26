@@ -23,7 +23,6 @@ export async function login(formData) {
     console.log("Login error:", error)
     redirect('/error')
   }
-  console.log("Login error:", error)
   redirect('/posts')
 }
 
@@ -39,9 +38,9 @@ export async function signup(formData) {
   const { error } = await supabase.auth.signUp(data);
 
   if (error) {
+    console.log("Signup error:", error)
     redirect('/error');
   }
-
-  revalidatePath('/', 'layout');
+  console.log("Signup successful")
   redirect('/posts');
 }
