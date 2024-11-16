@@ -12,7 +12,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="pt-br">
       <body className={inter.className}>{children}</body>
-      <link rel="icon" href="/armdillo_socials_img1.jpeg" type="image/svg+xml" />
+      <link rel="icon" href="/armdillo_socials_img.svg" type="image/svg+xml" />
     </html>
   );
 }
