@@ -12,10 +12,9 @@ import { Button } from '@/components/ui/button'
 import { Avatar, AvatarImage } from "@/components/ui/avatar"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, } from "@/components/ui/card"
 
-//CUSTOM COMPONENT IMPORTS
+//CUSTOM IMPORTS
 import { signOut } from '../posts/actions'
 import { LogOut } from 'lucide-react';
-import UpdateProfile, { UpdateAvatar } from "./action";
 import UpdateProfileAndAvatar from "./action";
 
 export default async function ProfilePage() {
@@ -59,15 +58,15 @@ export default async function ProfilePage() {
                   <AvatarImage htmlFor="picture" id="picture" src={avatar_url}></AvatarImage>
                 </Avatar>
 
-                <Input className="w-auto" id="picture" type="file" accept="image/jpeg, image/jpg, image/png" />
+                <Input className="w-auto" id="picture" type="file" accept="image/*"/>
               </div>
               <div className="flex flex-col space-y-1.5">
-                <Label >Name:</Label>
-                <Input id="name" name="name" placeholder={user.full_name} />
+              <Label>Username:</Label>
+              <Input id="username" name="username" placeholder={`@${user.username}`}/>
               </div>
               <div className="flex flex-col space-y-1.5">
-                <Label>Username:</Label>
-                <Input id="username" name="username" placeholder={user.username}/>
+              <Label >Name:</Label>
+              <Input id="name" name="name" placeholder={user.full_name} />
               </div>
             </div>
           </CardContent>

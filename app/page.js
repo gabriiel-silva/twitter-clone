@@ -20,7 +20,7 @@ export default function LoginPage() {
       <main>
         <Card className="w-[350px] m-auto mt-36">
           <CardHeader className="text-center">
-            <CardTitle>Twitter</CardTitle>
+            <CardTitle>Armdillo Socials</CardTitle>
             <CardDescription>Discover new things now!</CardDescription>
           </CardHeader>
           {showLoginForm ? <LoginForm /> : <SignupForm />}

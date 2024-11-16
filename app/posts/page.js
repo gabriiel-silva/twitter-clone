@@ -12,11 +12,10 @@ import { Avatar, AvatarImage } from "@/components/ui/avatar"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, } from "@/components/ui/card"
 
 //ICON IMPORTS
-import { HeartIcon, MessageCircleMoreIcon, Share2Icon } from 'lucide-react'
+import { HeartIcon, MessageCircleMoreIcon, Share2Icon, LogOut, Trash2 } from 'lucide-react'
 
-// CUSTOM COMPONENT IMPORTS
-import { signOut } from './actions'
-import { LogOut } from 'lucide-react';
+// CUSTOM IMPORTS
+import { createPost, deletePost, signOut } from './actions';
 
 
 export default async function PostsPage() {
@@ -49,9 +48,18 @@ export default async function PostsPage() {
                     </button>
                 </div>
 
-                <div className='flex flex-col gap-4 w-1/2 border shadow-sm m-auto mt-40 rounded-sm p-20 '>
+                <div className='relative flex flex-col gap-4 w-1/2 border shadow-sm m-auto mt-10 rounded-sm p-20 '>
+                    <CardTitle>Create a new post</CardTitle>
+
+                    <input type="text" id="textInput" className="border border-gray-300 rounded-md p-10 w-full" placeholder="Insert your content here" />
+
+                    <Button onClick={createPost} className="hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">Post</Button>
+
+                </div>
+
+                <div className='flex flex-col gap-4 w-1/2 border shadow-sm m-auto mt-10 rounded-sm p-20 '>
                     <CardTitle>Timeline</CardTitle>
-                    <CardDescription>Estes sao os seus posts no clone do Twitter.</CardDescription>
+                    <CardDescription>Those are your timeline tweets</CardDescription>
                     {
                         posts.map((post) => {
                             const user = users.find(u => u.id === post.user_owner);
@@ -61,6 +69,7 @@ export default async function PostsPage() {
 
                                 <Card className="bg-white shadow-md rounded-lg overflow-hidden ">
                                     <CardHeader>
+                                    {userID && <Trash2 className='hover:bg-red-50 cursor-pointer mb-4 w-4 h-4' data-post-id={post.id} onClick={deletePost} />}
                                         <div className="flex items-center">
                                             <Avatar>
                                                 <AvatarImage htmlFor="picture" id="picture" src={avatar_url}></AvatarImage>
