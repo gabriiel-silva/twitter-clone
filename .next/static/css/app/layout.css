@@ -636,18 +636,24 @@ video {
   margin-top: 0.25rem;
   margin-bottom: 0.25rem;
 }
+<<<<<<< HEAD
   .mb-4 {
   margin-bottom: 1rem;
 }
+=======
+>>>>>>> 556ddd0595f3e01f3009dd95c4ae20bcc003de83
   .ml-2 {
   margin-left: 0.5rem;
 }
   .mr-2 {
   margin-right: 0.5rem;
 }
+<<<<<<< HEAD
   .mt-10 {
   margin-top: 2.5rem;
 }
+=======
+>>>>>>> 556ddd0595f3e01f3009dd95c4ae20bcc003de83
   .mt-36 {
   margin-top: 9rem;
 }
@@ -747,9 +753,12 @@ video {
   .cursor-default {
   cursor: default;
 }
+<<<<<<< HEAD
   .cursor-pointer {
   cursor: pointer;
 }
+=======
+>>>>>>> 556ddd0595f3e01f3009dd95c4ae20bcc003de83
   .select-none {
   user-select: none;
 }
@@ -800,9 +809,12 @@ video {
   .whitespace-nowrap {
   white-space: nowrap;
 }
+<<<<<<< HEAD
   .rounded {
   border-radius: 0.25rem;
 }
+=======
+>>>>>>> 556ddd0595f3e01f3009dd95c4ae20bcc003de83
   .rounded-full {
   border-radius: 9999px;
 }
@@ -821,10 +833,13 @@ video {
   .border-0 {
   border-width: 0px;
 }
+<<<<<<< HEAD
   .border-gray-300 {
   --tw-border-opacity: 1;
   border-color: rgb(209 213 219 / var(--tw-border-opacity));
 }
+=======
+>>>>>>> 556ddd0595f3e01f3009dd95c4ae20bcc003de83
   .border-input {
   border-color: hsl(var(--input));
 }
@@ -856,9 +871,12 @@ video {
   .p-1 {
   padding: 0.25rem;
 }
+<<<<<<< HEAD
   .p-10 {
   padding: 2.5rem;
 }
+=======
+>>>>>>> 556ddd0595f3e01f3009dd95c4ae20bcc003de83
   .p-20 {
   padding: 5rem;
 }
@@ -1051,24 +1069,31 @@ video {
   background-color: hsl(var(--destructive) / 0.9);
 }
 
+<<<<<<< HEAD
   .hover\:bg-gray-700:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(55 65 81 / var(--tw-bg-opacity));
 }
 
+=======
+>>>>>>> 556ddd0595f3e01f3009dd95c4ae20bcc003de83
   .hover\:bg-primary\/90:hover {
   background-color: hsl(var(--primary) / 0.9);
 }
 
+<<<<<<< HEAD
   .hover\:bg-red-50:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(254 242 242 / var(--tw-bg-opacity));
 }
 
+=======
+>>>>>>> 556ddd0595f3e01f3009dd95c4ae20bcc003de83
   .hover\:bg-secondary\/80:hover {
   background-color: hsl(var(--secondary) / 0.8);
 }
 
+<<<<<<< HEAD
   .hover\:bg-red-100:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(254 226 226 / var(--tw-bg-opacity));
@@ -1079,6 +1104,8 @@ video {
   background-color: rgb(239 68 68 / var(--tw-bg-opacity));
 }
 
+=======
+>>>>>>> 556ddd0595f3e01f3009dd95c4ae20bcc003de83
   .hover\:text-accent-foreground:hover {
   color: hsl(var(--accent-foreground));
 }

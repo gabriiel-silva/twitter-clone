@@ -71,6 +71,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 /***/ }),
 
+<<<<<<< HEAD
 /***/ "(rsc)/./node_modules/lucide-react/dist/esm/icons/trash-2.js":
 /*!*************************************************************!*\
   !*** ./node_modules/lucide-react/dist/esm/icons/trash-2.js ***!
@@ -81,6 +82,8 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 /***/ }),
 
+=======
+>>>>>>> 556ddd0595f3e01f3009dd95c4ae20bcc003de83
 /***/ "(rsc)/./node_modules/lucide-react/dist/esm/shared/src/utils.js":
 /*!****************************************************************!*\
   !*** ./node_modules/lucide-react/dist/esm/shared/src/utils.js ***!

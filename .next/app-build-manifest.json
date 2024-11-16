@@ -15,11 +15,14 @@
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/posts/page.js"
+<<<<<<< HEAD
     ],
     "/profile/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/profile/page.js"
+=======
+>>>>>>> 556ddd0595f3e01f3009dd95c4ae20bcc003de83
     ]
   }
 }

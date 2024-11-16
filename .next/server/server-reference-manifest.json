@@ -18,5 +18,9 @@
     }
   },
   "edge": {},
+<<<<<<< HEAD
   "encryptionKey": "JWn4MVjctRFQ+KypMZ+xhy4cB5UURh/ffoD1IEADXjM="
+=======
+  "encryptionKey": "aiyHxArJmUgP3liLDpetul/MC8vxeZLpAARnlVjmHUg="
+>>>>>>> 556ddd0595f3e01f3009dd95c4ae20bcc003de83
 }
