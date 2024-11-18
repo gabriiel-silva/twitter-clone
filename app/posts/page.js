@@ -12,7 +12,7 @@ import { Avatar, AvatarImage } from "@/components/ui/avatar"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, } from "@/components/ui/card"
 
 //ICON IMPORTS
-import { HeartIcon, MessageCircleMoreIcon, Share2Icon, LogOut, Trash2 } from 'lucide-react'
+import { HeartIcon, MessageCircleMoreIcon, Share2Icon, LogOut, Trash2, ChevronLeft } from 'lucide-react'
 
 // CUSTOM IMPORTS
 import { createPost, deletePost, signOut } from './actions';
@@ -43,12 +43,13 @@ export default async function PostsPage() {
         return (
             <main>
                 <div className='flex absolute top-3 left-5 text-xl leading-10 font-bold'>
+                    <button> <a href="/"> <ChevronLeft className="mr-5"/> </a> </button> 
                     <button onClick={signOut}>
                         <LogOut />
                     </button>
                 </div>
 
-                <div className='relative flex flex-col gap-4 w-1/2 border shadow-sm m-auto mt-10 rounded-sm p-20 '>
+                <div className='relative flex flex-col gap-4 w-3/4 md:w-1/2 border shadow-sm m-auto mt-16 md:mt-10 rounded-sm p-5 md:p-10 '>
                     <CardTitle>Create a new post</CardTitle>
 
                     <input type="text" id="textInput" className="border border-gray-300 rounded-md p-10 w-full" placeholder="Insert your content here" />
@@ -57,7 +58,7 @@ export default async function PostsPage() {
 
                 </div>
 
-                <div className='flex flex-col gap-4 w-1/2 border shadow-sm m-auto mt-10 rounded-sm p-20 '>
+                <div className='flex flex-col gap-4 w-3/4 md:w-1/2 border shadow-sm m-auto mt-10 rounded-sm p-5 md:p-10 '>
                     <CardTitle>Timeline</CardTitle>
                     <CardDescription>Those are your timeline tweets</CardDescription>
                     {
@@ -69,7 +70,7 @@ export default async function PostsPage() {
 
                                 <Card className="bg-white shadow-md rounded-lg overflow-hidden ">
                                     <CardHeader>
-                                    {userID && <Trash2 className='hover:bg-red-50 cursor-pointer mb-4 w-4 h-4' data-post-id={post.id} onClick={deletePost} />}
+                                        {userID && <Trash2 className='hover:bg-red-50 cursor-pointer mb-4 w-4 h-4' data-post-id={post.id} onClick={deletePost} />}
                                         <div className="flex items-center">
                                             <Avatar>
                                                 <AvatarImage htmlFor="picture" id="picture" src={avatar_url}></AvatarImage>
@@ -81,38 +82,44 @@ export default async function PostsPage() {
                                         </div>
                                     </CardHeader>
 
-                                    <div className='flex absolute top-3 right-5 text-xl leading-10 '>
+                                    <div className='flex absolute top-0 right-0 md:top-3 md:right-5 text-xl leading-10'>
                                         <Link href="/profile">
                                             <Avatar>
                                                 <AvatarImage htmlFor="picture" id="picture" src={avatar_url}></AvatarImage>
                                             </Avatar>
                                         </Link>
-                                        <Link href="/profile" className='ml-2'>Profile</Link>
+                                        <Button variant="outline" className='ml-2 bg-black hover:bg-gray-700 text-white hover:text-white font-bold'>
+                                            <a href="/profile">Edit Profile</a>
+                                        </Button>
                                     </div>
 
                                     <CardContent className="grid gap-4">
                                         <p>{post.content}</p>
                                     </CardContent>
-                                    <CardFooter>
-                                        <Button variant="ghost" className="w-1/3 flex gap-2 text-lg font-bold">
-                                            <HeartIcon className='w-4 h-4' />
-                                            <div>
-                                                {post.likes}
-                                            </div>
+                                    <CardFooter className="flex flex-wrap flex-col w-full gap-2 p-2 md:gap-4 md:p-4 sm:flex-row">
+                                        <Button
+                                            variant="ghost"
+                                            className="flex-1 flex gap-1 md:gap-2 text-sm md:text-lg font-bold"
+                                        >
+                                            <HeartIcon className="w-3 h-3 md:w-4 md:h-4" />
+                                            <div>{post.likes}</div>
                                         </Button>
-                                        <Button variant="ghost" className="w-1/3 flex gap-2 text-lg font-bold">
-                                            <MessageCircleMoreIcon className='w-4 h-4' />
-                                            <div>
-                                                {post.number_comments}
-                                            </div>
+                                        <Button
+                                            variant="ghost"
+                                            className="flex-1 flex gap-1 md:gap-2 text-sm md:text-lg font-bold"
+                                        >
+                                            <MessageCircleMoreIcon className="w-3 h-3 md:w-4 md:h-4" />
+                                            <div>{post.number_comments}</div>
                                         </Button>
-                                        <Button variant="ghost" className="w-1/3 flex gap-2 text-lg font-bold">
-                                            <Share2Icon className='w-4 h-4' />
-                                            <div>
-                                                {post.shares}
-                                            </div>
+                                        <Button
+                                            variant="ghost"
+                                            className="flex-1 flex gap-1 md:gap-2 text-sm md:text-lg font-bold"
+                                        >
+                                            <Share2Icon className="w-3 h-3 md:w-4 md:h-4" />
+                                            <div>{post.shares}</div>
                                         </Button>
                                     </CardFooter>
+
                                 </Card>
                             )
                         })

@@ -14,7 +14,7 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle, } from "@/compone
 
 //CUSTOM IMPORTS
 import { signOut } from '../posts/actions'
-import { LogOut } from 'lucide-react';
+import { LogOut, ChevronLeft } from 'lucide-react';
 import UpdateProfileAndAvatar from "./action";
 
 export default async function ProfilePage() {
@@ -41,7 +41,7 @@ export default async function ProfilePage() {
   return (
     <main>
       <div className='flex absolute top-3 left-5 text-xl leading-10 font-bold'>
-
+      <button> <a href="/posts"> <ChevronLeft className="mr-5"/> </a></button> 
         <button onClick={signOut}>
           <LogOut />
         </button>
