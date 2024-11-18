@@ -82,7 +82,7 @@ export default async function PostsPage() {
                                         </div>
                                     </CardHeader>
 
-                                    <div className='flex absolute top-0 right-0 md:top-3 md:right-5 text-xl leading-10'>
+                                    <div className='flex absolute top-3 right-5 text-xl leading-10'>
                                         <Link href="/profile">
                                             <Avatar>
                                                 <AvatarImage htmlFor="picture" id="picture" src={avatar_url}></AvatarImage>
