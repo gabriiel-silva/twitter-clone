@@ -43,7 +43,7 @@ export default async function PostsPage() {
         return (
             <main>
                 <div className='flex absolute top-3 left-5 text-xl leading-10 font-bold'>
-                    <button> <a href="/"> <ChevronLeft className="mr-5"/> </a> </button> 
+                    <button> <a href="./"> <ChevronLeft className="mr-5"/> </a> </button> 
                     <button onClick={signOut}>
                         <LogOut />
                     </button>
